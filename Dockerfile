@@ -25,7 +25,7 @@ RUN wget https://github.com/edenhill/librdkafka/archive/v${LIBRD_VER}.tar.gz && 
     rm -rf librdkafka-${LIBRD_VER} && rm -rf v${LIBRD_VER}.tar.gz && \
     apk del .make-deps
 
-FROM dependency-build as final
+FROM dependency-build as builder
 WORKDIR /code
 COPY requirements-alpine.in ./requirements.in
 RUN pip3 install pip-tools
@@ -34,12 +34,26 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 RUN apk update && \
     apk add --upgrade apk-tools &&  \
     apk -U upgrade && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* \
+
+FROM builder as final
+COPY resources/kafka-topics.json /usr/local/etc/service/kafka-topics.yaml
+
+ENV WORKERS=4
+ENV APP_NAME=telemetry-metrics-filter
+ENV APP_PORT=9088
+ENV KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+ENV WORKER_TIMEOUT=300
+#KAFKA_TOPICS_TO_FILTER=cray-telemetry-fan,cray-telemetry-power,cray-telemetry-pressure,cray-telemetry-temperature,cray-telemetry-voltage
+ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.yaml
 
 COPY ./app ./app
 
-CMD [   "gunicorn", "app.main:app", \
-        "--workers", "4", \
-        "--worker-class", "uvicorn.workers.UvicornWorker", \
-        "--bind", "0.0.0.0:9088" \
-    ]
+CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT" ]
+
+#
+#CMD [   "gunicorn", "app.main:app", \
+#        "--workers", "4", \
+#        "--worker-class", "uvicorn.workers.UvicornWorker", \
+#        "--bind", "0.0.0.0:9088" \
+#    ]

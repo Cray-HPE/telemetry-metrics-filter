@@ -1,0 +1,17 @@
+{
+    "Topics": [
+        "cray-telemetry-temperature",
+        "cray-telemetry-voltage",
+        "cray-telemetry-power",
+        "cray-telemetry-energy",
+        "cray-telemetry-fan",
+        "cray-telemetry-pressure",
+        "cray-telemetry-humidity",
+        "cray-telemetry-liquidflow",
+        "cray-fabric-telemetry",
+        "cray-fabric-perf-telemetry",
+        "cray-fabric-crit-telemetry",
+        "cray-dmtf-resource-event",
+        "cray-fabric-health-events"
+    ]
+}

@@ -24,6 +24,7 @@
 import logging
 import uvicorn
 import json
+import os
 from dateutil.parser import parse
 
 from fastapi import BackgroundTasks, FastAPI
@@ -128,7 +129,10 @@ def on_consume(msg: Message):
 
 
 def start_filtering():
-    topics = settings.kafka_topics_to_filter.split(',')
+    #Todo this needs to be changed, we need to read from the file spec'd by ENV: KAFKA_TOPIC_FILE
+    with open(os.getenv("KAFKA_TOPIC_FILE")) as topics_file:
+        config_data = json.load(topics_file)
+    topics = config_data["Topics"]
     print(topics)
     consumer.consume(topics, on_consumed=on_consume)
 
