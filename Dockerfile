@@ -47,6 +47,8 @@ ENV WORKER_TIMEOUT=300
 #KAFKA_TOPICS_TO_FILTER=cray-telemetry-fan,cray-telemetry-power,cray-telemetry-pressure,cray-telemetry-temperature,cray-telemetry-voltage
 ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.yaml
 
+#todo need to set this to run as NOBODY
+
 COPY ./app ./app
 
 CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT" ]
