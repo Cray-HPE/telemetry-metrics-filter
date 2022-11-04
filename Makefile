@@ -1,52 +1,30 @@
-include .env
-export
+# MIT License
+#
+# (C) Copyright [2021-2022] Hewlett Packard Enterprise Development LP
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
 
-TARGET_SYSTEM_PYTHON="/usr/bin/env python3.9"
+# Service
+NAME ?= telemetry-metrics-filter
+VERSION ?= $(shell cat .version)
 
-LOCAL_PYTHON_VERSION = 3.9.12
-PYTHON_DIR = $(shell pyenv root)/versions/${LOCAL_PYTHON_VERSION}/bin
-SYSTEM_PYTHON = ${PYTHON_DIR}/python3
-SYSTEM_PIP = ${PYTHON_DIR}/pip
-# virtual environment vars
-VENV = $(shell pwd)/venv
-PYTHON_VENV = ${VENV}/bin/python3
-VENV_PIP = ${VENV}/bin/pip3
+all : image
 
-# Compile and install python dependencies in virtual environment
-venv: reqs/requirements.in
-	test -d ${VENV} || ${SYSTEM_PYTHON} -m venv $(VENV)
-	${VENV_PIP} install pip-tools
-	${VENV}/bin/pip-compile --output-file=requirements.txt reqs/requirements.in
-	${VENV_PIP} install --no-cache-dir -r requirements.txt
-
-run:
-	${VENV}/bin/gunicorn app.main:app \
-		--workers ${WORKERS} \
-		--worker-class uvicorn.workers.UvicornWorker \
-		--bind 0.0.0.0:${APP_PORT}
-# Make a python zipapp with Linkedin's shiv tool
-zipapp: clean reqs/requirements.in
-	${SYSTEM_PIP} install shiv
-	${SYSTEM_PIP} install pip-tools
-	${PYTHON_DIR}/pip-compile --output-file=requirements.txt reqs/requirements.in
-	${SYSTEM_PIP} install . --target=dist/
-	${SYSTEM_PIP} install --no-cache-dir -r requirements.txt --target=dist/
-	$$(cp .env dist/)
-	${PYTHON_DIR}/shiv \
-		--site-packages dist \
-		--compressed \
-		-o ${APP_NAME}.pyz \
-		-e app.gunicorn_server:run \
-		--preamble shiv_cleanup.py \
-		-p ${TARGET_SYSTEM_PYTHON}
-
-run_zipapp: zipapp
-	$(shell ./${APP_NAME}.pyz)
-
-clean:
-	rm -rf __pycache__
-	rm -rf $(VENV)
-	rm -rf dist build *.egg-info
-	find . -type f -name '*.pyz' -delete
-
-.PHONY: venv run clean
+image:
+	docker build ${NO_CACHE} --pull ${DOCKER_ARGS} --tag '${NAME}:${VERSION}' .
