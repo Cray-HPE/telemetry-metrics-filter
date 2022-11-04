@@ -123,7 +123,6 @@ def on_consume(msg: Message):
     """
     new_topic = f'{msg.topic()}{settings.filtered_topic_suffix}'
     value = filter_msg(msg)
-    print(msg)
     if value:
         producer.produce(value, topic=new_topic, on_delivery=on_delivery)
 
@@ -133,7 +132,6 @@ def start_filtering():
     with open(os.getenv("KAFKA_TOPIC_FILE")) as topics_file:
         config_data = json.load(topics_file)
     topics = config_data["Topics"]
-    print(topics)
     consumer.consume(topics, on_consumed=on_consume)
 
 
