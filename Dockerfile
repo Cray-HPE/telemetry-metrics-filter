@@ -40,6 +40,7 @@ FROM builder as final
 COPY resources/kafka-topics.json /usr/local/etc/service/kafka-topics.json
 
 ENV WORKERS=4
+ENV WORKER_TIMEOUT=300
 ENV APP_NAME=telemetry-metrics-filter
 ENV APP_PORT=9088
 ENV KAFKA_BOOTSTRAP_SERVERS=localhost:9092
@@ -49,4 +50,4 @@ ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.json
 
 COPY ./app ./app
 
-CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT" ]
+CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT --timeout ${WORKER_TIMEOUT}" ]
