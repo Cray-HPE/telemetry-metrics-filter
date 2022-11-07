@@ -76,7 +76,7 @@ class Throttling:
     Drop some messages based on a set of FilterPatterns. 
     """
     filters = []
-    default_rate = FilterPattern('Default rate', 10)
+    default_rate = FilterPattern('default-rate', 30)
 
     def add_json_filter_topic(self, data):
         """
@@ -92,10 +92,10 @@ class Throttling:
         """
         Add a single filter for mountain messages.
         """
-        rate = config.get("Rate", 1)
-        topic = config.get("Topic", "Default rate")
-        if topic == 'Default Rate':
-            default_rate = FilterPattern(topic, rate)
+        rate = config.get("Rate", 30)
+        topic = config.get("Topic", "default-rate")
+        if topic == 'default-rate':
+            self.default_rate = FilterPattern('default-rate', rate)
         fp = FilterPattern(topic, rate)
         self.filters.append(fp)
 

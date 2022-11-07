@@ -142,6 +142,7 @@ def on_consume(msg: Message):
 def start_filtering():
     with open(settings.kafka_topic_file) as topics_file:
         topics_to_filter = json.load(topics_file)['Topics']
+        logger.info(f'Topics to consumer from {topics_to_filter}')
         consumer.consume(topics_to_filter, on_consumed=on_consume)
 
 
@@ -165,6 +166,7 @@ def counter_setup():
 def initialize():
     global settings
     settings = Settings()
+    logger.info(settings)
     producer_config = {"bootstrap.servers": settings.kafka_bootstrap_servers}
     consumer_config = {
         'bootstrap.servers': settings.kafka_bootstrap_servers,
@@ -178,8 +180,10 @@ def initialize():
     throttler = Throttling()
     prometheus_counters = {}
     counter_setup()
+
     with open(settings.kafka_topic_file) as topics_file:
         rates = json.load(topics_file)['Throttling']
+        logger.info(rates)
         throttler.add_json_filter_topic(rates)
     logger.info('Initialized')
 
