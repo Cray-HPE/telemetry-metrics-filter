@@ -45,6 +45,7 @@ class AIOConsumer:
         self.loop.close()
 
     def poll_task(self, on_consumed):
+        self.logger.info('beginning polling')
         while not self.closed:
             try:
                 message = self.consumer.poll(0.1)
@@ -58,13 +59,14 @@ class AIOConsumer:
                 self.close()
 
     def subscribe(self, topics):
-        def assign_offset(consumer, partitions):
-            part_list = []
-            for p in partitions:
-                p.offset = confluent_kafka.OFFSET_END
-                part_list.append(p.partition)
-            consumer.assign(partitions)
-        self.consumer.subscribe(topics, on_assign=assign_offset)
+        # def assign_offset(consumer, partitions):
+        #     part_list = []
+        #     for p in partitions:
+        #         # p.offset = confluent_kafka.OFFSET_END
+        #         part_list.append(p.partition)
+        #     consumer.assign(partitions)
+        self.consumer.subscribe(topics ) #, on_assign=assign_offset)
+        self.logger.info('subscribed')
 
     def consume(self, topics, on_consumed=None):
         self.consumer.subscribe(topics)
