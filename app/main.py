@@ -84,8 +84,12 @@ async def prometheus_metrics():
     future = loop.create_future()
     loop.call_soon_threadsafe(future.set_result, prometheus_counters)
     result = await future
-    payload = json.dumps(result)
+
+    payload = {}
+    for key, counter in result.items():
+        payload[key] = counter._value.get()
     logger.info(payload)
+
     return payload
 
 

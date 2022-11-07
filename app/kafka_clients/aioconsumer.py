@@ -22,6 +22,7 @@
 #
 
 import confluent_kafka
+import logging
 import asyncio
 
 from threading import Thread
@@ -33,6 +34,7 @@ class AIOConsumer:
         self.closed = False
         self.consumer = confluent_kafka.Consumer(config, logger=logger)
         self.loop = asyncio.get_event_loop()
+        self.logger = logging.getLogger()
         self.task = None
 
     def close(self):
