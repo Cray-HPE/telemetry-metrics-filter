@@ -16,7 +16,7 @@ RUN apk add --no-cache --virtual build-dep python3-dev gcc g++ linux-headers
 
 FROM build-base as dependency-build
 # Newer librdkafka install because confluent-kafka:1.9.2 is incompatiblbe with librdkafka installed for alpine:3.16
-RUN apk add --no-cache --virtual .make-deps bash make wget git &&  \
+RUN apk add --no-cache --virtual .make-deps bash make wget curl git &&  \
     apk add --no-cache musl-dev zlib-dev openssl zstd-dev pkgconfig libc-dev
 RUN wget https://github.com/edenhill/librdkafka/archive/v${LIBRD_VER}.tar.gz && \
     tar -xvf v${LIBRD_VER}.tar.gz && cd librdkafka-${LIBRD_VER} &&  \
