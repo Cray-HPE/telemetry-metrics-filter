@@ -20,23 +20,20 @@
 #  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #  OTHER DEALINGS IN THE SOFTWARE.
 #
+import json
 
 from typing import List
 from pydantic import BaseSettings, Field
-
-from dotenv import find_dotenv, load_dotenv
-
-load_dotenv(verbose=True)
 
 
 class Settings(BaseSettings):
     app_title: str = 'Metrics Filter'
     app_name: str = None
-    kafka_topics_to_filter: str = None
     filtered_topic_suffix: str = '-filtered'
     kafka_consumer_group: str = 'metrics-filter-group'
     kafka_bootstrap_servers: str = 'broker:29092'
-    default_interval = 10
+    kafka_topic_file: str = '/usr/local/etc/service/kafka-topics.json'
+    kafa_throttling_config: str = '/usr/local/etc/service/topic-throttling.json'
 
     class Config:
         env_prefix = ''

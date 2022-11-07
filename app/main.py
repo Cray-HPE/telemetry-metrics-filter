@@ -24,14 +24,14 @@
 import logging
 import uvicorn
 import json
-import os
-from dateutil.parser import parse
 
 from fastapi import BackgroundTasks, FastAPI
 from confluent_kafka import Message
 
 from app.kafka_clients.producer import Producer
 from app.kafka_clients.aioconsumer import AIOConsumer
+from app.schemas import CrayTelemetry
+from app.throttle import Throttling
 
 from starlette.background import BackgroundTask
 from app.settings import Settings
@@ -59,6 +59,7 @@ app = FastAPI(
 settings = None
 producer = None
 consumer = None
+throttler = None
 
 monitoring_counters = {
     'producer_errors': 0,
@@ -75,16 +76,26 @@ logger = logging.getLogger(__name__)
 
 
 def on_delivery(err, msg):
+    """
+    This is a callback when the producer sends a message
+    :param err: Kafka error message
+    :param msg: The message that was sent
+    :return:
+    """
     if err:
         monitoring_counters['producer_errors'] += 1
         logger.error(f'Delivery failed: {err}')
     else:
-        logger.info(f'Produced {msg.value()} to {msg.topic()} partition {msg.partition()}')
+        logger.debug(f'Produced {msg.value()} to {msg.topic()} partition {msg.partition()}')
         monitoring_counters['produced'] += 1
 
 
 @app.on_event("startup")
 async def startup_event():
+    """
+    Create settings, producer, consumer and throttler
+    Begin consuming from topics
+    """
     initialize()
     start_filtering()
 
@@ -96,53 +107,22 @@ async def shutdown_event():
     producer.close()
 
 
-def filter_msg(msg):
-    should_send = False
-    value = msg.value().decode("utf-8")
-    try:
-        json_object = json.loads(value)
-        for event in json_object['Events']:
-            sensors = []
-            for sensor in event['Oem']['Sensors']:
-                ts = parse(sensor['Timestamp'])
-                if ts.second % settings.default_interval == 0:
-                    sensors.append(sensor)
-            if sensors:
-                event['Oem']['Sensors'] = sensors
-                should_send = True
-    except json.decoder.JSONDecodeError:
-        logger.error("Consumed message is not in the expected json schema")
-    return json.dumps(json_object) if should_send else None
-
-
 def on_consume(msg: Message):
     """
     This will be called when a consumer receives a Message.
-    Gets a timestamp from confluent_kafka.Message
-    If timestamp is the correct interval than produce to new filtered topic
+    Parses the CrayTelemetryData with msgspec
+    Maps the results to our messages that will be sent
     """
     new_topic = f'{msg.topic()}{settings.filtered_topic_suffix}'
-    value = filter_msg(msg)
-    if value:
-        producer.produce(value, topic=new_topic, on_delivery=on_delivery)
+    throttle = throttler.is_throttled(msg)
+    if not throttle:
+        producer.produce(msg.value(), topic=new_topic, on_delivery=on_delivery)
 
 
 def start_filtering():
-    #Todo this needs to be changed, we need to read from the file spec'd by ENV: KAFKA_TOPIC_FILE
-    with open(os.getenv("KAFKA_TOPIC_FILE")) as topics_file:
-        config_data = json.load(topics_file)
-    topics = config_data["Topics"]
-    consumer.consume(topics, on_consumed=on_consume)
-
-
-@app.get("/")
-async def root():
-    return {"message": "Metrics Filterer"}
-
-
-@app.get("/metrics")
-async def state():
-    return {}
+    with open(settings.kafka_topic_file) as topics_file:
+        topics_to_filter = json.load(topics_file)['Topics']
+        consumer.consume(topics_to_filter, on_consumed=on_consume)
 
 
 def initialize():
@@ -155,9 +135,12 @@ def initialize():
         "enable.auto.commit": True,
         'auto.offset.reset': "earliest",
     }
-    global consumer, producer
+    global consumer, producer, throttler
     producer = Producer(producer_config)
     consumer = AIOConsumer(consumer_config, logger)
+    throttler = Throttling()
+    with open(settings.kafa_throttling_config, "r") as f:
+        throttler.add_json_filter_topic(f.read())
     logger.info('Initialized')
 
 

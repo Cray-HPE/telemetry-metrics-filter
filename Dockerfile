@@ -37,25 +37,18 @@ RUN apk update && \
     rm -rf /var/cache/apk/* \
 
 FROM builder as final
-COPY resources/kafka-topics.json /usr/local/etc/service/kafka-topics.yaml
+COPY resources/kafka-topics.json /usr/local/etc/service/kafka-topics.json
+COPY resources/topic-throttling.json /usr/local/etc/service/topic-throttling.json
 
 ENV WORKERS=4
 ENV APP_NAME=telemetry-metrics-filter
 ENV APP_PORT=9088
 ENV KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-ENV WORKER_TIMEOUT=300
-#KAFKA_TOPICS_TO_FILTER=cray-telemetry-fan,cray-telemetry-power,cray-telemetry-pressure,cray-telemetry-temperature,cray-telemetry-voltage
-ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.yaml
+ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.json
+ENV KAFKA_THROTTLING_CONFIG=/usr/local/etc/service/topic-throttling.json
 
 #todo need to set this to run as NOBODY
 
 COPY ./app ./app
 
 CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT" ]
-
-#
-#CMD [   "gunicorn", "app.main:app", \
-#        "--workers", "4", \
-#        "--worker-class", "uvicorn.workers.UvicornWorker", \
-#        "--bind", "0.0.0.0:9088" \
-#    ]

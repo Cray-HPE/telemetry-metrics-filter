@@ -21,36 +21,57 @@
 #  OTHER DEALINGS IN THE SOFTWARE.
 #
 
-from gunicorn.app.base import BaseApplication
 
-from app.settings import Settings
+from msgspec import Struct
 
-settings = Settings()
+from typing import Optional, Set
 
-
-class GunicornServer(BaseApplication):
-    """
-    This class should be used as the entry point to the app if youre packaging your app as a zipapp
-    """
-    def __init__(self, app, options=None):
-        self.options = options or {}
-        self.application = app
-        super().__init__()
-
-    def load_config(self):
-        config = {key: value for key, value in self.options.items()
-                  if key in self.cfg.settings and value is not None}
-        for key, value in config.items():
-            self.cfg.set(key.lower(), value)
-
-    def load(self):
-        return self.application
+from datetime import datetime
 
 
-def run():
-    options = {
-        'bind': f'0.0.0.0:{settings.app_port}',
-        'workers': 4,
-        'worker_class': 'uvicorn.workers.UvicornWorker',
-    }
-    GunicornServer('app.main:app', options).run()
+class Sensor(Struct):
+    Timestamp: str
+    Location: str
+    ParentalContext: str = None
+    PhysicalContext: str = None
+    Index: int = None
+    PhysicalSubContext: str = None
+    ParentalIndex: int = None
+    Value: str
+
+    def __hash__(self):
+        return hash(
+            (
+                self.Location,
+                self.ParentalContext,
+                self.PhysicalContext,
+                self.Index,
+                self.PhysicalSubContext,
+                self.ParentalIndex,
+            )
+        )
+
+
+class Oem(Struct):
+    Sensors: list[Sensor]
+    TelemetrySource: str
+
+    def __hash__(self):
+        return hash(self.TelemetrySource)
+
+
+class Event(Struct):
+    EventTimestamp: str
+    MessageId: str
+    Oem: Oem
+
+    def __hash__(self):
+        return hash(self.MessageId)
+
+
+class CrayTelemetry(Struct):
+    Context: str
+    Events: list[Event]
+
+    def __hash__(self):
+        return hash(self.Context)
