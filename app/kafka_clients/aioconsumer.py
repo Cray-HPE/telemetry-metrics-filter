@@ -60,17 +60,15 @@ class AIOConsumer:
             except KeyboardInterrupt:
                 self.close()
 
-    def subscribe(self, topics):
-        # def assign_offset(consumer, partitions):
-        #     part_list = []
-        #     for p in partitions:
-        #         # p.offset = confluent_kafka.OFFSET_END
-        #         part_list.append(p.partition)
-        #     consumer.assign(partitions)
-        self.consumer.subscribe(topics ) #, on_assign=assign_offset)
-        self.logger.info('subscribed')
 
     def consume(self, topics, on_consumed=None):
-        self.consumer.subscribe(topics)
+
+        def assign_offset(consumer, partitions):
+            for p in partitions:
+                p.offset = confluent_kafka.OFFSET_END
+            consumer.assign(partitions)
+        self.logger.info('subscribing')
+        self.consumer.subscribe(topics, on_assign=assign_offset)
+        self.logger.info('subscribed')
         self.task = Thread(target=self.poll_task, args=(on_consumed,))
         self.task.start()
