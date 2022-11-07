@@ -33,7 +33,6 @@ class Settings(BaseSettings):
     kafka_consumer_group: str = 'metrics-filter-group'
     kafka_bootstrap_servers: str = 'broker:29092'
     kafka_topic_file: str = '/usr/local/etc/service/kafka-topics.json'
-    kafa_throttling_config: str = '/usr/local/etc/service/topic-throttling.json'
 
     class Config:
         env_prefix = ''

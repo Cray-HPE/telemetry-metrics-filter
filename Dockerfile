@@ -38,14 +38,12 @@ RUN apk update && \
 
 FROM builder as final
 COPY resources/kafka-topics.json /usr/local/etc/service/kafka-topics.json
-COPY resources/topic-throttling.json /usr/local/etc/service/topic-throttling.json
 
 ENV WORKERS=4
 ENV APP_NAME=telemetry-metrics-filter
 ENV APP_PORT=9088
 ENV KAFKA_BOOTSTRAP_SERVERS=localhost:9092
 ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.json
-ENV KAFKA_THROTTLING_CONFIG=/usr/local/etc/service/topic-throttling.json
 
 #todo need to set this to run as NOBODY
 

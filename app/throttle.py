@@ -82,12 +82,11 @@ class Throttling:
         """
         Add a set of filters based on json
         """
-        config = json.loads(data)
-        if isinstance(config, list):
-            for c in config:
+        if isinstance(data, list):
+            for c in data:
                 self.add_filter(c)
         else:
-            self.add_filter(config)
+            self.add_filter(data)
 
     def add_filter(self, config):
         """
