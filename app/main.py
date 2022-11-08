@@ -122,6 +122,7 @@ async def start_kafka():
             consumer.assign(partitions)
             logger.info('OFFSET assigned')
         consumer.subscribe(topics_to_filter, on_assign=assign_offset)
+        #consumer.subscribe(topics_to_filter)
         logger.info('Subscribed')
         return await looptask()
 
@@ -131,7 +132,7 @@ def process_msg(msg):
     new_topic = f'{topic}{settings.filtered_topic_suffix}'
     throttle = throttler.is_throttled(msg)
     if not throttle:
-        producer.produce(msg, topic=new_topic, on_delivery=on_delivery)
+        producer.produce(value=msg.value().decode(), topic=new_topic, on_delivery=on_delivery)
         producer.flush()
 
 
@@ -161,7 +162,8 @@ def initialize():
         'bootstrap.servers': settings.kafka_bootstrap_servers,
         'group.id': f'{settings.kafka_consumer_group}',
         "enable.auto.commit": True,
-        'auto.offset.reset': "earliest",
+        'auto.offset.reset': "latest",
+        "enable.partition.eof": False,
     }
     global consumer, producer, throttler
     producer = Producer(producer_config)

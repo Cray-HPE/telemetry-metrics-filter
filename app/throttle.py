@@ -34,6 +34,13 @@ import logging
 logger = logging.getLogger()
 
 
+tags = ["ParentalContext",
+        "PhysicalContext",
+        "PhysicalSubContext",
+        "Index",
+        "ParentalIndex",
+        "Location"]
+
 class FilterPattern:
     """
     A pattern Object to filter messages for throttling
@@ -50,6 +57,16 @@ class FilterPattern:
         """
         return topic == self.topic
 
+    def build_key(self, sensor):
+        """
+        Build a unique key for this message from the values correlated with tags
+        This is used to keep track of the last timestamp we received for each message
+        """
+        key = None
+        for tag in tags:
+            key = (sensor.get(tag, None), key)
+        return key
+
     def should_throttle(self, telemetry_data: CrayTelemetry):
         """
         Loop through all the sensor data in Events. If any of them need to be sent then send the entire payload
@@ -58,16 +75,19 @@ class FilterPattern:
         :return: Boolean based on if it should send message or not
         """
         should_throttle = True
-        for event in telemetry_data.Events:
-            for sensor in event.Oem.Sensors:
-                # string_of_doom = sensor.Index+sensor.Location+sensor.ParentalIndex+sensor.PhysicalContext+\
-                #                  sensor.PhysicalSubContext+sensor.ParentalContext+event.MessageId+\
-                #                  telemetry_data.Context+telemetry_data.Oem.TelemetrySource
-                key = hash((telemetry_data, event, event.Oem, sensor))
-                sensor_time = parse(sensor.Timestamp).timestamp() * 1000  # epoch time in ms
+        for event in telemetry_data['Events']:
+            for sensor in event['Oem']['Sensors']:
+                # string_of_doom = f"""
+                #                  {sensor.Index}{sensor.Location}{sensor.ParentalIndex}{sensor.PhysicalContext}
+                #                  {sensor.PhysicalSubContext}{sensor.ParentalContex}{event.MessageId}
+                #                  {telemetry_data.Contex}{telemetry_data.Oem.TelemetrySource}
+                #                  """
+                # key = hash(string_of_doom)
+                sensor_key = self.build_key(sensor)
+                key = hash((sensor_key, event['MessageId'], event['Oem']['TelemetrySource'], telemetry_data['Context']))
+                sensor_time = parse(sensor['Timestamp']).timestamp() * 1000  # epoch time in ms
                 last_time = self.sensor_times.get(key, -99999999)
                 # check time with 100ms jitter
-                logger.info(f'last_time={last_time} sensor_time={sensor_time}')
                 if last_time + self.rate * 1000 - 100 < sensor_time or not should_throttle:
                     self.sensor_times[key] = sensor_time
                     should_throttle = False
@@ -110,12 +130,12 @@ class Throttling:
         """
         try:
             telemetry_data = decode(message.value(), type=CrayTelemetry)
+            results = json.loads(message.value())
             # go through filters, top to bottom. eval first match
             for filter in self.filters:
                 if filter.applies(message.topic()):
-                    logger.info(f'Using {message.topic()} filter')
-                    return filter.should_throttle(telemetry_data)
-            return self.default_rate.should_throttle(telemetry_data)
+                    return filter.should_throttle(results)
+            return self.default_rate.should_throttle(results)
         except DecodeError as e:
             logger.debug('Could not decode message, allowing message to send')
             return False

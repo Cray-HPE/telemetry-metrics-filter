@@ -39,25 +39,10 @@ class Sensor(Struct):
     ParentalIndex: int = None
     Value: str
 
-    def __hash__(self):
-        return hash(
-            (
-                self.Location,
-                self.ParentalContext,
-                self.PhysicalContext,
-                self.Index,
-                self.PhysicalSubContext,
-                self.ParentalIndex,
-            )
-        )
-
 
 class Oem(Struct):
     Sensors: list[Sensor]
     TelemetrySource: str
-
-    def __hash__(self):
-        return hash(self.TelemetrySource)
 
 
 class Event(Struct):
@@ -65,13 +50,8 @@ class Event(Struct):
     MessageId: str
     Oem: Oem
 
-    def __hash__(self):
-        return hash(self.MessageId)
 
 
 class CrayTelemetry(Struct):
     Context: str
     Events: list[Event]
-
-    def __hash__(self):
-        return hash(self.Context)

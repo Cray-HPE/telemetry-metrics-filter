@@ -49,7 +49,7 @@ class AIOConsumer:
         self.logger.info('Beginning Polling')
         while not self.closed:
             try:
-                message = self.consumer.poll(0)
+                message = self.consumer.poll(0.1)
                 if message is None:
                     continue
                 elif message.error():
