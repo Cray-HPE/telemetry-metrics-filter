@@ -123,10 +123,7 @@ async def start_kafka():
             logger.info('OFFSET assigned')
         consumer.subscribe(topics_to_filter, on_assign=assign_offset)
         logger.info('Subscribed')
-        loop = asyncio.get_event_loop()
-        future = loop.run_in_executor(app.state.executor, looptask)
-        return await future
-
+        return await looptask()
 
 
 def process_msg(msg):
@@ -134,24 +131,23 @@ def process_msg(msg):
     new_topic = f'{topic}{settings.filtered_topic_suffix}'
     throttle = throttler.is_throttled(msg)
     if not throttle:
-        producer.produce(msg.value(), topic=new_topic, on_delivery=on_delivery)
+        producer.produce(msg, topic=new_topic, on_delivery=on_delivery)
+        producer.flush()
 
 
-def looptask():
-    logger.info('Looptask')
-
+async def looptask():
     try:
         while True:
-            msg = consumer.poll(0.1)
-            if not msg:
-                logger.info('No Message received')
-                break
+            msg = consumer.poll(0)
+            if msg is None:
+                continue
             elif msg.error():
                 logger.error(f"ERROR: {msg.error()}")
             else:
-                logger.info('Processing Message')
-                process_msg(msg)
-        producer.flush()
+                loop = asyncio.get_event_loop()
+                loop.run_in_executor(app.state.executor, process_msg, msg)
+                #loop.call_soon_threadsafe(process_msg(msg))
+            await asyncio.sleep(0.1)
     except Exception as e:
         logger.error(f"Could not process incoming telemetry message: %s")
 

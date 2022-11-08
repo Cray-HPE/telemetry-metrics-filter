@@ -60,6 +60,9 @@ class FilterPattern:
         should_throttle = True
         for event in telemetry_data.Events:
             for sensor in event.Oem.Sensors:
+                # string_of_doom = sensor.Index+sensor.Location+sensor.ParentalIndex+sensor.PhysicalContext+\
+                #                  sensor.PhysicalSubContext+sensor.ParentalContext+event.MessageId+\
+                #                  telemetry_data.Context+telemetry_data.Oem.TelemetrySource
                 key = hash((telemetry_data, event, event.Oem, sensor))
                 sensor_time = parse(sensor.Timestamp).timestamp() * 1000  # epoch time in ms
                 last_time = self.sensor_times.get(key, -99999999)
@@ -68,9 +71,6 @@ class FilterPattern:
                 if last_time + self.rate * 1000 - 100 < sensor_time or not should_throttle:
                     self.sensor_times[key] = sensor_time
                     should_throttle = False
-                    logger.info('We dont need to throttle this')
-                else:
-                    logger.info('Throttle me')
 
         return should_throttle
 
@@ -115,7 +115,6 @@ class Throttling:
                 if filter.applies(message.topic()):
                     logger.info(f'Using {message.topic()} filter')
                     return filter.should_throttle(telemetry_data)
-            logger.info(f'Using default filter')
             return self.default_rate.should_throttle(telemetry_data)
         except DecodeError as e:
             logger.debug('Could not decode message, allowing message to send')
