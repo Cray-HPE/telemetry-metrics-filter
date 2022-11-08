@@ -16,11 +16,11 @@
     "Throttling": [
         {
             "Topic": "cray-telemetry-temperature",
-            "Rate": 10
+            "Rate": 30
         },
         {
             "Topic": "cray-telemetry-power",
-            "Rate": 10
+            "Rate": 30
         },
         {
             "Topic": "default-rate",

@@ -30,11 +30,10 @@ from confluent_kafka import KafkaException
 
 
 class AIOConsumer:
-    def __init__(self, config, logger):
+    def __init__(self, config):
         self.closed = False
         self.consumer = confluent_kafka.Consumer(config, logger=logger)
         self.loop = asyncio.get_event_loop()
-        self.logger = logging.getLogger()
         self.task = None
 
     def close(self):
@@ -47,10 +46,10 @@ class AIOConsumer:
         self.loop.close()
 
     def poll_task(self, on_consumed):
-        self.logger.info('beginning polling')
+        self.logger.info('Beginning Polling')
         while not self.closed:
             try:
-                message = self.consumer.poll(0.1)
+                message = self.consumer.poll(0)
                 if message is None:
                     continue
                 elif message.error():
@@ -59,7 +58,6 @@ class AIOConsumer:
                     self.loop.call_soon_threadsafe(on_consumed, message)
             except KeyboardInterrupt:
                 self.close()
-
 
     def consume(self, topics, on_consumed=None):
 

@@ -37,7 +37,7 @@ class Producer:
 
     def poll_task(self):
         while not self.is_closed:
-            self.producer.poll(0.1)
+            self.producer.poll(0)
 
     def close(self):
         self.is_closed = True

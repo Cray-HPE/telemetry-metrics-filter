@@ -11,12 +11,12 @@ RUN set -eux \
 
 #RUN apk add --no-cache python3 py3-pip librdkafka
 #RUN apk add --no-cache --virtual build-dep librdkafka-dev python3-dev gcc g++ linux-headers
-RUN apk add --no-cache python3 py3-pip
+RUN apk add --no-cache python3 py3-pip curl
 RUN apk add --no-cache --virtual build-dep python3-dev gcc g++ linux-headers
 
 FROM build-base as dependency-build
 # Newer librdkafka install because confluent-kafka:1.9.2 is incompatiblbe with librdkafka installed for alpine:3.16
-RUN apk add --no-cache --virtual .make-deps bash make wget curl git &&  \
+RUN apk add --no-cache --virtual .make-deps bash make wget git &&  \
     apk add --no-cache musl-dev zlib-dev openssl zstd-dev pkgconfig libc-dev
 RUN wget https://github.com/edenhill/librdkafka/archive/v${LIBRD_VER}.tar.gz && \
     tar -xvf v${LIBRD_VER}.tar.gz && cd librdkafka-${LIBRD_VER} &&  \
@@ -47,7 +47,7 @@ ENV KAFKA_BOOTSTRAP_SERVERS=localhost:9092
 ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.json
 
 #todo need to set this to run as NOBODY
-
+EXPOSE $APP_PORT
 COPY ./app ./app
 
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port $APP_PORT"]
