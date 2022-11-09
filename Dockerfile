@@ -1,5 +1,5 @@
 #FROM arti.dev.cray.com/baseos-docker-master-local/alpine:3.16.2
-FROM artifactory.algol60.net/docker.io/library/alpine:3.16.2 AS build-base
+FROM python:3.11-alpine AS build-base
 
 ENV LIBRD_VER=1.9.2
 WORKDIR /tmp
@@ -11,7 +11,7 @@ RUN set -eux \
 
 #RUN apk add --no-cache python3 py3-pip librdkafka
 #RUN apk add --no-cache --virtual build-dep librdkafka-dev python3-dev gcc g++ linux-headers
-RUN apk add --no-cache python3 py3-pip
+#RUN apk add --no-cache python3 py3-pip
 RUN apk add --no-cache --virtual build-dep python3-dev gcc g++ linux-headers
 
 FROM build-base as dependency-build
