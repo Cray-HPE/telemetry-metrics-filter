@@ -20,7 +20,7 @@
 #  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #  OTHER DEALINGS IN THE SOFTWARE.
 #
-
+import functools
 import logging
 import uvicorn
 import json
@@ -30,12 +30,10 @@ from fastapi import BackgroundTasks, Depends, FastAPI
 from confluent_kafka import Message
 from prometheus_client import Counter
 
-from app.kafka_clients.producer import Producer
+from app.kafka_clients.aioproducer import AIOProducer
 from app.kafka_clients.aioconsumer import AIOConsumer
 from app.throttle import Throttling
 from app.settings import Settings
-
-
 
 
 description = f"""
@@ -61,12 +59,14 @@ settings = None
 producer = None
 consumer = None
 throttler = None
-prometheus_counters = None
+producer_stats = None
+consumer_stats = None
 
 
 monitoring_counters = {
     'producer_errors': 0,
     'consumer_errors': 0,
+    'filtered': 0,
     'produced': 0,
     'consumed': 0,
 }
@@ -80,16 +80,11 @@ logger = logging.getLogger(__name__)
 
 @app.get("/metrics")
 async def prometheus_metrics():
-    loop = asyncio.get_running_loop()
-    future = loop.create_future()
-    loop.call_soon_threadsafe(future.set_result, prometheus_counters)
-    result = await future
-
-    payload = {}
-    for key, counter in result.items():
-        payload[key] = counter._value.get()
-    logger.info(payload)
-
+    payload = {
+        'Consumed': monitoring_counters['consumed'],
+        'Produced': monitoring_counters['produced'],
+        'Filtered': monitoring_counters['filtered'],
+    }
     return payload
 
 
@@ -100,14 +95,9 @@ def on_delivery(err, msg):
     :param msg: The message that was sent
     :return:
     """
-    topic = msg.topic()
-    counter_name = topic.replace('-', '_')
     if err:
-        monitoring_counters['producer_errors'] += 1
-        prometheus_counters[f'{counter_name}_produce_failures'].inc()
+        logger.error(err)
     else:
-        prometheus_counters[f'{counter_name}_produced'].inc()
-        logger.debug(f'Produced {msg.value()} to {topic} partition {msg.partition()}')
         monitoring_counters['produced'] += 1
 
 
@@ -118,7 +108,7 @@ async def startup_event():
     Begin consuming from topics
     """
     initialize()
-    start_filtering()
+    await start_filtering()
 
 
 @app.on_event("shutdown")
@@ -126,6 +116,7 @@ async def shutdown_event():
     logger.info('Shutting down metrics-filtering')
     consumer.close()
     producer.close()
+    asyncio.get_event_loop().close()
 
 
 def on_consume(msg: Message):
@@ -134,65 +125,70 @@ def on_consume(msg: Message):
     Parses the CrayTelemetryData with msgspec
     Maps the results to our messages that will be sent
     """
+    monitoring_counters['consumed'] += 1
     topic = msg.topic()
     new_topic = f'{topic}{settings.filtered_topic_suffix}'
     throttle = throttler.is_throttled(msg)
-    counter_name = topic.replace('-', '_')
-    prometheus_counters[f'{counter_name}_consumed'].inc()
     if not throttle:
-        prometheus_counters[f'{counter_name}_throttled'].inc()
         producer.produce(msg.value(), topic=new_topic, on_delivery=on_delivery)
+    else:
+        monitoring_counters['filtered'] += 1
 
 
-def start_filtering():
+async def start_filtering():
+    await producer.start()
     with open(settings.kafka_topic_file) as topics_file:
         topics_to_filter = json.load(topics_file)['Topics']
         logger.info(f'Topics to consumer from {topics_to_filter}')
-        consumer.consume(topics_to_filter, on_consumed=on_consume)
+        consume = functools.partial(consumer.consume, on_consumed=on_consume)
+        await consume(topics_to_filter)
 
 
-def counter_setup():
-    with open(settings.kafka_topic_file) as topics_file:
-        topics_to_filter = json.load(topics_file)['Topics']
-        print(topics_to_filter)
-        for topic in topics_to_filter:
-            topic = f'{topic}'.replace('-', '_')
-            topic_name_filtered = f'{topic}_filtered'
+def producer_counts(json_str):
+    msg = f'total_produced %d, total_filtered %d' % (monitoring_counters['produced'], monitoring_counters['filtered'])
+    logger.info(msg)
 
-            prometheus_counters[f'{topic_name_filtered}_produce_failures'] = \
-                Counter(f'{topic_name_filtered}_produce_failures', f'Total failures producing to {topic_name_filtered}')
-            prometheus_counters[f'{topic_name_filtered}_produced'] = Counter(f'{topic_name_filtered}_produced',
-                                                                             f'Count produced to {topic_name_filtered}')
-            prometheus_counters[f'{topic}_consumed'] = Counter(f'{topic}_consumed', f'Count consumed from {topic}')
-            prometheus_counters[f'{topic}_throttled'] = Counter(f'{topic}_throttled', f'Count throttled from {topic}')
 
+def consumer_counts(json_str):
+    # data = json.loads(json_str)
+    # metrics_to_grab = ['msg_cnt', 'msg_size']
+    # consumer_stats['name'] = data['name']
+    # consumer_stats['data'] = {}
+    # for metric_name in metrics_to_grab:
+    #     consumer_stats['data'][metric_name] = data[metric_name]
+    #     consumer_stats['data']['topics'] = {}
+    #     for key, val in data['topics'].items():
+    #         consumer_stats['data']['topics'][key] = {'name': val['topic']}
+    msg = f'total_consumed %d' % monitoring_counters['consumed']
+    logger.info(msg)
 
 
 def initialize():
     global settings
     settings = Settings()
     logger.info(settings)
-    producer_config = {"bootstrap.servers": settings.kafka_bootstrap_servers}
+    producer_config = {
+        "bootstrap.servers": settings.kafka_bootstrap_servers,
+        'statistics.interval.ms': settings.kafka_statistics_sampling_ms,
+    }
     consumer_config = {
         'bootstrap.servers': settings.kafka_bootstrap_servers,
         'group.id': f'{settings.kafka_consumer_group}',
         "enable.auto.commit": True,
         'auto.offset.reset': "earliest",
+        'statistics.interval.ms': settings.kafka_statistics_sampling_ms,
     }
-    global consumer, producer, throttler, prometheus_counters
-    producer = Producer(producer_config)
-    consumer = AIOConsumer(consumer_config, logger)
+    global consumer, producer, throttler, producer_stats, consumer_stats
+    producer_stats, consumer_stats = {}, {}
+    producer = AIOProducer(producer_config, stats_cb=producer_counts)
+    consumer = AIOConsumer(consumer_config, logger, stats_cb=consumer_counts)
     throttler = Throttling()
-    prometheus_counters = {}
-    counter_setup()
 
     with open(settings.kafka_topic_file) as topics_file:
         rates = json.load(topics_file)['Throttling']
         logger.info(rates)
         throttler.add_json_filter_topic(rates)
     logger.info('Initialized')
-
-
 
 
 def main():

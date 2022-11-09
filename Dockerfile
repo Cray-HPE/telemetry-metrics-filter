@@ -50,4 +50,5 @@ ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.json
 
 COPY ./app ./app
 
-CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT --timeout ${WORKER_TIMEOUT}" ]
+#CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT --timeout ${WORKER_TIMEOUT}" ]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port $APP_PORT"]

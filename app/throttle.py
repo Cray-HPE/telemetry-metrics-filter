@@ -20,14 +20,12 @@
 #  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #  OTHER DEALINGS IN THE SOFTWARE.
 #
-import json
 
-from confluent_kafka import Message
-from dateutil.parser import parse
 from msgspec.json import decode
 from msgspec import DecodeError
 
 from app.schemas import CrayTelemetry
+from app.utils import time_to_epoch_ms
 
 import logging
 
@@ -61,7 +59,7 @@ class FilterPattern:
         for event in telemetry_data.Events:
             for sensor in event.Oem.Sensors:
                 key = hash((telemetry_data, event, event.Oem, sensor))
-                sensor_time = parse(sensor.Timestamp).timestamp() * 1000  # epoch time in ms
+                sensor_time = time_to_epoch_ms(sensor.Timestamp)
                 last_time = self.sensor_times.get(key, -99999999)
                 # check time with 100ms jitter
                 if last_time + self.rate * 1000 - 100 < sensor_time or not should_throttle:

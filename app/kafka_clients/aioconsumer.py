@@ -21,20 +21,19 @@
 #  OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import confluent_kafka
-import logging
 import asyncio
+import confluent_kafka
+import functools
 
-from threading import Thread
 from confluent_kafka import KafkaException
 
 
 class AIOConsumer:
-    def __init__(self, config, logger):
+    def __init__(self, config, logger, stats_cb=None):
         self.closed = False
-        self.consumer = confluent_kafka.Consumer(config, logger=logger)
+        self.consumer = confluent_kafka.Consumer(config, logger=logger, stats_cb=stats_cb)
         self.loop = asyncio.get_event_loop()
-        self.logger = logging.getLogger()
+        self.logger = logger
         self.task = None
 
     def close(self):
@@ -42,33 +41,30 @@ class AIOConsumer:
         self.consumer.unsubscribe()
         self.consumer.stop()
         self.logger.info('Stopped consumer')
-        if self.task:
-            self.task.join()
-        self.loop.close()
 
-    def poll_task(self, on_consumed):
-        self.logger.info('beginning polling')
+
+    async def poll_task(self, on_consumed):
+        self.logger.info('Beginning polling')
+        poll = functools.partial(self.consumer.poll, 0)
         while not self.closed:
             try:
-                message = self.consumer.poll(0.1)
+                message = await self.loop.run_in_executor(None, poll)
+                #message = await self.loop.run_in_executor(poll)
                 if message is None:
                     continue
                 elif message.error():
                     raise KafkaException(message.error())
                 elif on_consumed:
-                    self.loop.call_soon_threadsafe(on_consumed, message)
+                    on_consumed(message)
             except KeyboardInterrupt:
                 self.close()
 
-
-    def consume(self, topics, on_consumed=None):
+    async def consume(self, topics, on_consumed=None):
 
         def assign_offset(consumer, partitions):
             for p in partitions:
                 p.offset = confluent_kafka.OFFSET_END
             consumer.assign(partitions)
-        self.logger.info('subscribing')
         self.consumer.subscribe(topics, on_assign=assign_offset)
-        self.logger.info('subscribed')
-        self.task = Thread(target=self.poll_task, args=(on_consumed,))
-        self.task.start()
+        self.logger.info('Subscribed')
+        asyncio.gather(self.poll_task(on_consumed=on_consumed))
