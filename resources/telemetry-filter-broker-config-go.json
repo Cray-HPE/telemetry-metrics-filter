@@ -1,0 +1,26 @@
+
+{
+    "BrokerAddress": "localhost:9092",
+    "ConsumerGroup": "telemetry-metrics-filter",
+    "FilteredTopicSuffix": "-filtered",
+    "TopicsToFilter": {
+        "cray-telemetry-temperature": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-voltage": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-power": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-energy": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-fan": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-pressure": {
+            "ThrottlePeriodSeconds": 10 
+        }
+    } 
+}

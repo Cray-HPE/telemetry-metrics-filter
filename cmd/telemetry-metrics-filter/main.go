@@ -14,6 +14,9 @@ import (
 	"github.com/namsral/flag"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	// Needed for profiling
+	_ "net/http/pprof"
 )
 
 type BrokerHealthStatus string
@@ -69,7 +72,7 @@ func setupLogging() {
 
 func main() {
 	// Parse CLI flag configuration
-	brokerConfigFile := flag.String("broker_config_file", "./configs/telemetry-filter-broker-config.json", "Broker configuration file")
+	brokerConfigFile := flag.String("broker_config_file", "./resources/telemetry-filter-broker-config-go.json", "Broker configuration file")
 	workerCount := flag.Int("worker_count", 10, "Number of event workers")
 	httpListenString := flag.String("http_listen", "0.0.0.0:9088", "HTTP Server listen string")
 
