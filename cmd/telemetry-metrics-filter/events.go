@@ -5,6 +5,9 @@ import (
 	"fmt"
 
 	"go.uber.org/zap"
+
+	gojson "github.com/goccy/go-json"
+	jsoniter "github.com/json-iterator/go"
 )
 
 type CrayJSONPayload struct {
@@ -60,6 +63,15 @@ const (
 	UnmarshalEventStrategyInvalid UnmarshalEventStrategy = iota
 	UnmarshalEventStrategyHMCollector
 	UnmarshalEventStrategyEncodingJson
+	UnmarshalEventStrategyGoJSON             // https://github.com/goccy/go-json
+	UnmarshalEventStrategyJsoniterCompatible // https://github.com/json-iterator/go
+	UnmarshalEventStrategyJsoniterDefault    // https://github.com/json-iterator/go
+	UnmarshalEventStrategyJsoniterFastest    // https://github.com/json-iterator/go
+	UnmarshalEventStrategyEasyJson           // https://github.com/mailru/easyjson
+
+	// These ones uses Get methods for fields, which is very different from the others
+	// UnmarshalEventStrategyJsonParser // https://github.com/buger/jsonparser
+	// UnmarshalEventStrategyFastJson // https://github.com/valyala/fastjson
 )
 
 func (s UnmarshalEventStrategy) String() string {
@@ -68,6 +80,16 @@ func (s UnmarshalEventStrategy) String() string {
 		return "hmcollector"
 	case UnmarshalEventStrategyEncodingJson:
 		return "encoding/json"
+	case UnmarshalEventStrategyGoJSON:
+		return "go-json"
+	case UnmarshalEventStrategyJsoniterCompatible:
+		return "jsoniter-compatible"
+	case UnmarshalEventStrategyJsoniterDefault:
+		return "jsoniter-default"
+	case UnmarshalEventStrategyJsoniterFastest:
+		return "jsoniter-fastest"
+	case UnmarshalEventStrategyEasyJson:
+		return "easyjson"
 	default:
 		return fmt.Sprintf("invalid(%d)", s)
 	}
@@ -79,6 +101,16 @@ func ParseUnmarshalEventStrategyFromString(str string) (UnmarshalEventStrategy, 
 		return UnmarshalEventStrategyHMCollector, nil
 	case "encoding/json":
 		return UnmarshalEventStrategyEncodingJson, nil
+	case "go-json":
+		return UnmarshalEventStrategyGoJSON, nil
+	case "jsoniter-compatible":
+		return UnmarshalEventStrategyJsoniterCompatible, nil
+	case "jsoniter-default":
+		return UnmarshalEventStrategyJsoniterDefault, nil
+	case "jsoniter-fastest":
+		return UnmarshalEventStrategyJsoniterFastest, nil
+	case "easyjson":
+		return UnmarshalEventStrategyEasyJson, nil
 	default:
 		return UnmarshalEventStrategyInvalid, fmt.Errorf("unknown unmarshal event strategy (%s)", str)
 	}
@@ -159,6 +191,27 @@ func UnmarshalEvents(logger *zap.Logger, bodyBytes []byte, strategy UnmarshalEve
 		var events Events
 		err := json.Unmarshal(bodyBytes, &events)
 		return events, err
+	case UnmarshalEventStrategyGoJSON:
+		var events Events
+		err := gojson.Unmarshal(bodyBytes, &events)
+		return events, err
+	case UnmarshalEventStrategyJsoniterCompatible:
+		var events Events
+		var jsoniterInstance = jsoniter.ConfigCompatibleWithStandardLibrary
+		err := jsoniterInstance.Unmarshal(bodyBytes, &events)
+		return events, err
+	case UnmarshalEventStrategyJsoniterDefault:
+		var events Events
+		var jsoniterInstance = jsoniter.ConfigDefault
+		err := jsoniterInstance.Unmarshal(bodyBytes, &events)
+		return events, err
+	case UnmarshalEventStrategyJsoniterFastest:
+		var events Events
+		var jsoniterInstance = jsoniter.ConfigFastest
+		err := jsoniterInstance.Unmarshal(bodyBytes, &events)
+		return events, err
+	case UnmarshalEventStrategyEasyJson:
+		fallthrough
 	default:
 		return Events{}, fmt.Errorf("unknown unmarshal event strategy (%s)", strategy)
 	}
