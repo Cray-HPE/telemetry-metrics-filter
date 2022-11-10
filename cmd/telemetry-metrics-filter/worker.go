@@ -62,7 +62,8 @@ type Worker struct {
 	ctx       context.Context
 	wg        *sync.WaitGroup
 
-	brokerConfig BrokerConfig
+	brokerConfig           BrokerConfig
+	unmarshalEventStrategy UnmarshalEventStrategy
 
 	metrics  *WorkerMetrics
 	producer *Producer
@@ -124,7 +125,7 @@ func (w *Worker) Start() {
 			atomic.AddUint64(&w.metrics.ReceivedMessages, 1)
 
 			// Unmarshal the event json
-			events, err := UnmarshalEvents(logger, workUnit.PayloadRaw)
+			events, err := UnmarshalEvents(logger, workUnit.PayloadRaw, w.unmarshalEventStrategy)
 			if err != nil {
 				logger.Error("Failed to unmarshal events", zap.String("topic", workUnit.Topic), zap.ByteString("payload", workUnit.PayloadRaw))
 				atomic.AddUint64(&w.metrics.MalformedMessaged, 1)

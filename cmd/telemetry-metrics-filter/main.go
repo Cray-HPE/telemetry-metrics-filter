@@ -75,11 +75,19 @@ func main() {
 	brokerConfigFile := flag.String("broker_config_file", "./resources/telemetry-filter-broker-config-go.json", "Broker configuration file")
 	workerCount := flag.Int("worker_count", 10, "Number of event workers")
 	httpListenString := flag.String("http_listen", "0.0.0.0:9088", "HTTP Server listen string")
+	unmarshalEventStrategyString := flag.String("unmarshal_event_strategy", "hmcollector", "How should json payloads be unmarshaled")
 
 	flag.Parse()
 
 	// Setup logging
 	setupLogging()
+
+	// Parse unmarshal strategy
+	unmarshalEventStrategy, err := ParseUnmarshalEventStrategyFromString(*unmarshalEventStrategyString)
+	if err != nil {
+		logger.Fatal("Failed to parse unmarshal event strategy", zap.Error(err))
+	}
+	logger.Info("Unmarshal event strategy", zap.Any("strategy", unmarshalEventStrategy))
 
 	// Parse broker configuration
 	logger.Info("Parsing Broker configuration", zap.String("brokerConfigFile", *brokerConfigFile))
@@ -130,13 +138,14 @@ func main() {
 	workerCtx, workerCancel := context.WithCancel(context.Background())
 	for id := 0; id < *workerCount; id++ {
 		worker := &Worker{
-			id:           id,
-			logger:       logger.With(zap.Int("WorkerID", id)),
-			brokerConfig: brokerConfig,
-			workQueue:    make(chan UnparsedEventPayload),
-			ctx:          workerCtx,
-			wg:           &workerWg,
-			producer:     producer,
+			id:                     id,
+			logger:                 logger.With(zap.Int("WorkerID", id)),
+			brokerConfig:           brokerConfig,
+			workQueue:              make(chan UnparsedEventPayload),
+			ctx:                    workerCtx,
+			wg:                     &workerWg,
+			producer:               producer,
+			unmarshalEventStrategy: unmarshalEventStrategy,
 		}
 		workers = append(workers, worker)
 
