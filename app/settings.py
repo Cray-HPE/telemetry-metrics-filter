@@ -20,9 +20,7 @@
 #  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #  OTHER DEALINGS IN THE SOFTWARE.
 #
-import json
 
-from typing import List
 from pydantic import BaseSettings, Field
 
 
@@ -33,6 +31,7 @@ class Settings(BaseSettings):
     kafka_consumer_group: str = 'metrics-filter-group'
     kafka_bootstrap_servers: str = 'broker:29092'
     kafka_topic_file: str = '/usr/local/etc/service/kafka-topics.json'
+    kafka_statistics_sampling_ms: int = 60000
 
     class Config:
         env_prefix = ''

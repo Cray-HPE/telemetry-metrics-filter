@@ -1,0 +1,8 @@
+fastapi
+gunicorn
+uvicorn[standard]
+confluent-kafka
+python-dateutil
+msgspec
+pytest
+requests

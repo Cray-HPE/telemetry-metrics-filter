@@ -8,19 +8,16 @@
         "cray-telemetry-pressure",
         "cray-telemetry-humidity",
         "cray-telemetry-liquidflow",
-        "cray-fabric-telemetry",
-        "cray-fabric-perf-telemetry",
-        "cray-fabric-crit-telemetry",
-        "cray-dmtf-resource-event"
+        "sma-hms"
     ],
     "Throttling": [
         {
             "Topic": "cray-telemetry-temperature",
-            "Rate": 10
+            "Rate": 30
         },
         {
             "Topic": "cray-telemetry-power",
-            "Rate": 10
+            "Rate": 30
         },
         {
             "Topic": "default-rate",

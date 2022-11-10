@@ -21,28 +21,31 @@
 #  OTHER DEALINGS IN THE SOFTWARE.
 #
 
+import asyncio
 import confluent_kafka
-from threading import Thread
+import functools
 
 from app.settings import Settings
 
 
-class Producer:
+class AIOProducer:
     def __init__(self, config):
         self.is_closed = False
         self.producer = confluent_kafka.Producer(config)
-        self.poll_thread = Thread(target=self.poll_task)
-        self.poll_thread.start()
         self.settings = Settings()
+        self.loop = asyncio.get_event_loop()
 
-    def poll_task(self):
+    async def poll_task(self):
+        poll = functools.partial(self.producer.poll, 0)
         while not self.is_closed:
-            self.producer.poll(0.1)
+            await self.loop.run_in_executor(None, poll)
 
     def close(self):
         self.is_closed = True
         self.producer.flush()
-        self.poll_thread.join()
 
     def produce(self, value, topic, on_delivery=None):
         self.producer.produce(value=value, topic=topic, on_delivery=on_delivery)
+
+    async def start(self):
+        asyncio.gather(self.poll_task())

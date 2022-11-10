@@ -1,5 +1,5 @@
 #FROM arti.dev.cray.com/baseos-docker-master-local/alpine:3.16.2
-FROM artifactory.algol60.net/docker.io/library/alpine:3.16.2 AS build-base
+FROM artifactory.algol60.net/docker.io/library/python:3.11-alpine AS build-base
 
 ENV LIBRD_VER=1.9.2
 WORKDIR /tmp
@@ -11,7 +11,7 @@ RUN set -eux \
 
 #RUN apk add --no-cache python3 py3-pip librdkafka
 #RUN apk add --no-cache --virtual build-dep librdkafka-dev python3-dev gcc g++ linux-headers
-RUN apk add --no-cache python3 py3-pip
+#RUN apk add --no-cache python3 py3-pip
 RUN apk add --no-cache --virtual build-dep python3-dev gcc g++ linux-headers
 
 FROM build-base as dependency-build
@@ -27,7 +27,7 @@ RUN wget https://github.com/edenhill/librdkafka/archive/v${LIBRD_VER}.tar.gz && 
 
 FROM dependency-build as builder
 WORKDIR /code
-COPY requirements-alpine.in ./requirements.in
+COPY requirements.in ./requirements.in
 RUN pip3 install pip-tools
 RUN pip-compile --output-file requirements.txt requirements.in
 RUN pip3 install --no-cache-dir -r requirements.txt
@@ -50,4 +50,5 @@ ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.json
 
 COPY ./app ./app
 
-CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT --timeout ${WORKER_TIMEOUT}" ]
+#CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT --timeout ${WORKER_TIMEOUT}" ]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port $APP_PORT"]
