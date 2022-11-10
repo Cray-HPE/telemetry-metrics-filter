@@ -28,7 +28,6 @@ import asyncio
 
 from fastapi import BackgroundTasks, Depends, FastAPI
 from confluent_kafka import Message
-from prometheus_client import Counter
 
 from app.kafka_clients.aioproducer import AIOProducer
 from app.kafka_clients.aioconsumer import AIOConsumer
@@ -63,15 +62,6 @@ producer_stats = None
 consumer_stats = None
 
 
-monitoring_counters = {
-    'producer_errors': 0,
-    'consumer_errors': 0,
-    'filtered': 0,
-    'produced': 0,
-    'consumed': 0,
-}
-
-
 # initialize logger
 logging.basicConfig(format='[%(asctime)s] [%(process)d] [%(levelname)s] %(message)s',
                     level=logging.INFO)
@@ -80,25 +70,7 @@ logger = logging.getLogger(__name__)
 
 @app.get("/metrics")
 async def prometheus_metrics():
-    payload = {
-        'Consumed': monitoring_counters['consumed'],
-        'Produced': monitoring_counters['produced'],
-        'Filtered': monitoring_counters['filtered'],
-    }
-    return payload
-
-
-def on_delivery(err, msg):
-    """
-    This is a callback when the producer sends a message
-    :param err: Kafka error message
-    :param msg: The message that was sent
-    :return:
-    """
-    if err:
-        logger.error(err)
-    else:
-        monitoring_counters['produced'] += 1
+    return {}
 
 
 @app.on_event("startup")
@@ -119,20 +91,27 @@ async def shutdown_event():
     asyncio.get_event_loop().close()
 
 
+def on_delivery(err, msg):
+    """
+    This is a callback when the producer sends a message
+    :param err: Kafka error message
+    :param msg: The message that was sent
+    """
+    if err:
+        logger.error(err)
+
+
 def on_consume(msg: Message):
     """
     This will be called when a consumer receives a Message.
     Parses the CrayTelemetryData with msgspec
     Maps the results to our messages that will be sent
     """
-    monitoring_counters['consumed'] += 1
     topic = msg.topic()
     new_topic = f'{topic}{settings.filtered_topic_suffix}'
     throttle = throttler.is_throttled(msg)
     if not throttle:
         producer.produce(msg.value(), topic=new_topic, on_delivery=on_delivery)
-    else:
-        monitoring_counters['filtered'] += 1
 
 
 async def start_filtering():
@@ -144,44 +123,22 @@ async def start_filtering():
         await consume(topics_to_filter)
 
 
-def producer_counts(json_str):
-    msg = f'total_produced %d, total_filtered %d' % (monitoring_counters['produced'], monitoring_counters['filtered'])
-    logger.info(msg)
-
-
-def consumer_counts(json_str):
-    # data = json.loads(json_str)
-    # metrics_to_grab = ['msg_cnt', 'msg_size']
-    # consumer_stats['name'] = data['name']
-    # consumer_stats['data'] = {}
-    # for metric_name in metrics_to_grab:
-    #     consumer_stats['data'][metric_name] = data[metric_name]
-    #     consumer_stats['data']['topics'] = {}
-    #     for key, val in data['topics'].items():
-    #         consumer_stats['data']['topics'][key] = {'name': val['topic']}
-    msg = f'total_consumed %d' % monitoring_counters['consumed']
-    logger.info(msg)
-
-
 def initialize():
     global settings
     settings = Settings()
     logger.info(settings)
     producer_config = {
         "bootstrap.servers": settings.kafka_bootstrap_servers,
-        'statistics.interval.ms': settings.kafka_statistics_sampling_ms,
     }
     consumer_config = {
         'bootstrap.servers': settings.kafka_bootstrap_servers,
         'group.id': f'{settings.kafka_consumer_group}',
         "enable.auto.commit": True,
         'auto.offset.reset': "earliest",
-        'statistics.interval.ms': settings.kafka_statistics_sampling_ms,
     }
-    global consumer, producer, throttler, producer_stats, consumer_stats
-    producer_stats, consumer_stats = {}, {}
-    producer = AIOProducer(producer_config, stats_cb=producer_counts)
-    consumer = AIOConsumer(consumer_config, logger, stats_cb=consumer_counts)
+    global consumer, producer, throttler
+    producer = AIOProducer(producer_config)
+    consumer = AIOConsumer(consumer_config, logger)
     throttler = Throttling()
 
     with open(settings.kafka_topic_file) as topics_file:

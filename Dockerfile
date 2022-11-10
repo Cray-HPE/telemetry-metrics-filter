@@ -1,5 +1,5 @@
 #FROM arti.dev.cray.com/baseos-docker-master-local/alpine:3.16.2
-FROM python:3.11-alpine AS build-base
+FROM artifactory.algol60.net/docker.io/library/python:3.11-alpine AS build-base
 
 ENV LIBRD_VER=1.9.2
 WORKDIR /tmp
@@ -27,7 +27,7 @@ RUN wget https://github.com/edenhill/librdkafka/archive/v${LIBRD_VER}.tar.gz && 
 
 FROM dependency-build as builder
 WORKDIR /code
-COPY requirements-alpine.in ./requirements.in
+COPY requirements.in ./requirements.in
 RUN pip3 install pip-tools
 RUN pip-compile --output-file requirements.txt requirements.in
 RUN pip3 install --no-cache-dir -r requirements.txt

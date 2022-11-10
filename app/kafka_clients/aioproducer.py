@@ -29,9 +29,9 @@ from app.settings import Settings
 
 
 class AIOProducer:
-    def __init__(self, config, stats_cb=None):
+    def __init__(self, config):
         self.is_closed = False
-        self.producer = confluent_kafka.Producer(config, stats_cb=stats_cb)
+        self.producer = confluent_kafka.Producer(config)
         self.settings = Settings()
         self.loop = asyncio.get_event_loop()
 

@@ -29,12 +29,11 @@ from confluent_kafka import KafkaException
 
 
 class AIOConsumer:
-    def __init__(self, config, logger, stats_cb=None):
+    def __init__(self, config, logger):
         self.closed = False
-        self.consumer = confluent_kafka.Consumer(config, logger=logger, stats_cb=stats_cb)
+        self.consumer = confluent_kafka.Consumer(config, logger=logger)
         self.loop = asyncio.get_event_loop()
         self.logger = logger
-        self.task = None
 
     def close(self):
         self.closed = True
@@ -42,14 +41,12 @@ class AIOConsumer:
         self.consumer.stop()
         self.logger.info('Stopped consumer')
 
-
     async def poll_task(self, on_consumed):
         self.logger.info('Beginning polling')
         poll = functools.partial(self.consumer.poll, 0)
         while not self.closed:
             try:
                 message = await self.loop.run_in_executor(None, poll)
-                #message = await self.loop.run_in_executor(poll)
                 if message is None:
                     continue
                 elif message.error():

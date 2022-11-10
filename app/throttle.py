@@ -57,12 +57,13 @@ class FilterPattern:
         """
         should_throttle = True
         for event in telemetry_data.Events:
+            now = time_to_epoch_ms(event.EventTimestamp)  # Use the parent timestamp instead of parsing each sensor time
             for sensor in event.Oem.Sensors:
                 key = hash((telemetry_data, event, event.Oem, sensor))
-                sensor_time = time_to_epoch_ms(sensor.Timestamp)
                 last_time = self.sensor_times.get(key, -99999999)
                 # check time with 100ms jitter
-                if last_time + self.rate * 1000 - 100 < sensor_time or not should_throttle:
+                if last_time + self.rate * 1000 - 100 < now or not should_throttle:
+                    sensor_time = time_to_epoch_ms(sensor.Timestamp)
                     self.sensor_times[key] = sensor_time
                     should_throttle = False
 

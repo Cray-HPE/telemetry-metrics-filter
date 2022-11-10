@@ -4,4 +4,5 @@ uvicorn[standard]
 confluent-kafka
 python-dateutil
 msgspec
-prometheus_client
+pytest
+requests
