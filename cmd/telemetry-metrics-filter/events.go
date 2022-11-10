@@ -57,6 +57,7 @@ type Events struct {
 	EventsOCount int     `json:"Events@odata.count,omitempty"`
 }
 
+// TODO think about making this a string
 type UnmarshalEventStrategy int
 
 const (

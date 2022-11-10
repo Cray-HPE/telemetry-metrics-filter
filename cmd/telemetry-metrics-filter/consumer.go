@@ -53,7 +53,7 @@ func (c *Consumer) Start() {
 	consumerConfig := kafka.ConfigMap{
 		"bootstrap.servers":      c.brokerConfig.BrokerAddress,
 		"group.id":               c.brokerConfig.ConsumerGroup,
-		"client.id":              fmt.Sprintf("telemetry-metrics-filter_%s", c.hostname),
+		"client.id":              fmt.Sprintf("%s-id-%d", c.hostname, c.id),
 		"session.timeout.ms":     6000,
 		"statistics.interval.ms": 1000,
 		"enable.auto.commit":     true,
