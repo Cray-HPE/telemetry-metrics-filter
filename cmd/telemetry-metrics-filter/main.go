@@ -76,6 +76,7 @@ func main() {
 	workerCount := flag.Int("worker_count", 10, "Number of event workers")
 	httpListenString := flag.String("http_listen", "0.0.0.0:9088", "HTTP Server listen string")
 	unmarshalEventStrategyString := flag.String("unmarshal_event_strategy", "hmcollector", "How should json payloads be unmarshaled")
+	consumerSessionTimeoutSeconds := flag.Int("consumer_session_timeout_seconds", 20, "Configure kafka consumer session timeout in seconds")
 
 	flag.Parse()
 
@@ -165,6 +166,8 @@ func main() {
 		consumerCtx:  consumerCtx,
 		workers:      workers,
 		wg:           &consumerWg,
+
+		consumerSessionTimeoutSeconds: *consumerSessionTimeoutSeconds,
 	}
 
 	go consumer.Start()

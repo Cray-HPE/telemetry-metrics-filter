@@ -35,6 +35,8 @@ type Consumer struct {
 	consumerCtx context.Context
 	wg          *sync.WaitGroup
 
+	consumerSessionTimeoutSeconds int
+
 	brokerConfig BrokerConfig
 	brokerHealth BrokerHealth
 
@@ -54,10 +56,10 @@ func (c *Consumer) Start() {
 		"bootstrap.servers":      c.brokerConfig.BrokerAddress,
 		"group.id":               c.brokerConfig.ConsumerGroup,
 		"client.id":              fmt.Sprintf("%s-id-%d", c.hostname, c.id),
-		"session.timeout.ms":     6000,
+		"session.timeout.ms":     c.consumerSessionTimeoutSeconds * 1000,
 		"statistics.interval.ms": 1000,
 		"enable.auto.commit":     true,
-		"auto.offset.reset":      "latest",
+		"auto.offset.reset":      "earliest",
 	}
 
 	logger.Info("Connecting to kafka", zap.Any("consumerConfig", consumerConfig))
