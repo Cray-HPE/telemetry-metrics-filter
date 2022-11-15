@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/maphash"
+	"strconv"
 	"sync"
 	"sync/atomic"
 	"time"
 
 	"github.com/paulbellamy/ratecounter"
+	"github.com/prometheus/client_golang/prometheus"
 	"go.uber.org/zap"
 	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 )
@@ -28,10 +30,17 @@ func NewConsumerMetrics() *ConsumerMetrics {
 }
 
 type Consumer struct {
-	id          int
-	hostname    string
-	logger      *zap.Logger
+	id       int
+	hostname string
+	logger   *zap.Logger
+
+	// Both internal metrics for logging and prometheus metric are provided
+	// This is for convenience as the prometheus structs do not provide a good
+	// way to read their values.  We could switch to only using the prometheus
+	// metrics and the /metrics endpoint and remove the internal ones
 	metrics     *ConsumerMetrics
+	promMetrics *PromMetrics
+
 	consumerCtx context.Context
 	wg          *sync.WaitGroup
 
@@ -104,6 +113,10 @@ func (c *Consumer) Start() {
 					zap.Int32("OverallKafkaConsumerLag", atomic.LoadInt32(&c.metrics.OverallKafkaConsumerLag)),
 					zap.Int64("InstantKafkaMessagesPerSecond", c.metrics.InstantKafkaMessagesPerSecond.Rate()),
 				)
+				// Prometheus does not provide a "rate" metric so instead we use a gauge
+				// which we periodically update.  Here we simply reuse the periodic output
+				// of the internal metrics to do this.
+				c.promMetrics.MessagesConsumedPerSecond.With(prometheus.Labels{"ConsumerID": strconv.Itoa(c.id)}).Set(float64(c.metrics.InstantKafkaMessagesPerSecond.Rate()))
 			}
 		}
 	}()
@@ -132,6 +145,7 @@ func (c *Consumer) Start() {
 				// Update metrics
 				c.metrics.InstantKafkaMessagesPerSecond.Incr(1)
 				atomic.AddUint64(&c.metrics.ConsumedMessages, 1)
+				c.promMetrics.ConsumedMessages.With(prometheus.Labels{"ConsumerID": strconv.Itoa(c.id)}).Inc()
 
 				// Update health status
 				c.brokerHealth.Status = BrokerHealthOk
@@ -142,6 +156,7 @@ func (c *Consumer) Start() {
 				if e.TopicPartition.Topic == nil {
 					logger.Warn("Received message without a topic", zap.Any("msg", e))
 					atomic.AddUint64(&c.metrics.MalformedConsumedMessages, 1)
+					c.promMetrics.MalformedConsumedMessages.With(prometheus.Labels{"ConsumerID": strconv.Itoa(c.id)}).Inc()
 					continue
 				}
 
@@ -228,6 +243,7 @@ func (c *Consumer) Start() {
 				}
 
 				atomic.StoreInt32(&c.metrics.OverallKafkaConsumerLag, overallLag)
+				c.promMetrics.MessagesConsumedPerSecond.With(prometheus.Labels{"ConsumerID": strconv.Itoa(c.id)}).Set(float64(overallLag))
 
 				// If we received statistics that means we have connected to kafka.
 				// If no kafka messages are being sent the kafka health status will remain in Unknown,

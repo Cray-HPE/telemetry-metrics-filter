@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"sync/atomic"
 
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.uber.org/zap"
 )
@@ -15,6 +16,7 @@ type API struct {
 	consumer *Consumer
 	workers  []*Worker
 	producer *Producer
+	promReg  *prometheus.Registry
 
 	listenString string
 }
@@ -27,7 +29,8 @@ func (api *API) Start() {
 	http.HandleFunc("/readiness", api.ReadinessHandler)
 	http.HandleFunc("/health", api.HealthHandler)
 	http.HandleFunc("/health/workers", api.HealthWorkersHandler)
-	http.Handle("/metrics", promhttp.Handler())
+	// This will create everything that is needed for the handler no need to define our own func below
+	http.Handle("/metrics", promhttp.HandlerFor(api.promReg, promhttp.HandlerOpts{Registry: api.promReg}))
 
 	// Start HTTP server
 	logger.Info("Starting HTTP server", zap.String("listenAddress", api.listenString))

@@ -12,6 +12,7 @@ import (
 	"syscall"
 
 	"github.com/namsral/flag"
+	"github.com/prometheus/client_golang/prometheus"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
@@ -32,6 +33,17 @@ type BrokerHealth struct {
 	Status        BrokerHealthStatus `json:"Status"`
 	LastError     *string            `json:"LastError,omitempty"`
 	LastErrorCode *string            `json:"LastErrorCode,omitempty"`
+}
+
+// A struct for holding our prometheus metrics
+type PromMetrics struct {
+	ConsumedMessages          prometheus.GaugeVec
+	MalformedConsumedMessages prometheus.GaugeVec
+	OverallKafkaConsumerLag   prometheus.GaugeVec
+	MessagesConsumedPerSecond prometheus.GaugeVec
+	ProducedMessages          prometheus.GaugeVec
+	FailedToProduceMessages   prometheus.GaugeVec
+	MessagesProducedPerSecond prometheus.GaugeVec
 }
 
 var (
@@ -112,6 +124,51 @@ func main() {
 		panic(err)
 	}
 
+	metrics := &PromMetrics{
+		ConsumedMessages: *prometheus.NewGaugeVec(prometheus.GaugeOpts{
+			Name: "ConsumedMessages",
+			Help: "The number of messages consumed from the source topic by the filter",
+		}, []string{"ConsumerID"}),
+		MalformedConsumedMessages: *prometheus.NewGaugeVec(prometheus.GaugeOpts{
+			Name: "MalformedConsumedMessages",
+			Help: "The number of malformed messages consumed and discarded from the source topic by the filter",
+		}, []string{"ConsumerID"}),
+		OverallKafkaConsumerLag: *prometheus.NewGaugeVec(prometheus.GaugeOpts{
+			Name: "OverallKafkaConsumerLag",
+			Help: "The overall lag across all topics for the filter",
+		}, []string{"ConsumerID"}),
+		MessagesConsumedPerSecond: *prometheus.NewGaugeVec(prometheus.GaugeOpts{
+			Name: "MessagesConsumedPerSecond",
+			Help: "The rate of messages consumed by the filter per second",
+		}, []string{"ConsumerID"}),
+		ProducedMessages: *prometheus.NewGaugeVec(prometheus.GaugeOpts{
+			Name: "ProducedMessages",
+			Help: "The number of messages produced to the filter topic by the filter",
+		}, []string{"ProducerID"}),
+		FailedToProduceMessages: *prometheus.NewGaugeVec(prometheus.GaugeOpts{
+			Name: "FailedToProducedMessages",
+			Help: "The total number of messages that the filter failed to produce to the filter topic",
+		}, []string{"ProducerID"}),
+		MessagesProducedPerSecond: *prometheus.NewGaugeVec(prometheus.GaugeOpts{
+			Name: "MessagesProducedPerSecond",
+			Help: "The rate of messages produced to the filter topic by the filter per second",
+		}, []string{"ProducerID"}),
+	}
+
+	// Register our metrics
+	// The metrics struct will be passed to the structs
+	// which need to record metrics, and the register
+	// struct will be passed to the API to produce a
+	// Prometheus compatible endpoint at /metrics
+	promReg := prometheus.NewRegistry()
+	promReg.MustRegister(metrics.ConsumedMessages)
+	promReg.MustRegister(metrics.MalformedConsumedMessages)
+	promReg.MustRegister(metrics.OverallKafkaConsumerLag)
+	promReg.MustRegister(metrics.MessagesConsumedPerSecond)
+	promReg.MustRegister(metrics.ProducedMessages)
+	promReg.MustRegister(metrics.FailedToProduceMessages)
+	promReg.MustRegister(metrics.MessagesProducedPerSecond)
+
 	//
 	// Start producer
 	//
@@ -122,6 +179,7 @@ func main() {
 		id:           0,
 		logger:       logger.With(zap.Int("ProducerID", 0)),
 		brokerConfig: brokerConfig,
+		promMetrics:  metrics,
 
 		// ctx: producerCtx,
 		// wg:  &producerWg,
@@ -166,6 +224,7 @@ func main() {
 		consumerCtx:  consumerCtx,
 		workers:      workers,
 		wg:           &consumerWg,
+		promMetrics:  metrics,
 
 		consumerSessionTimeoutSeconds: *consumerSessionTimeoutSeconds,
 	}
@@ -180,6 +239,7 @@ func main() {
 		consumer:     consumer,
 		workers:      workers,
 		producer:     producer,
+		promReg:      promReg,
 		listenString: *httpListenString,
 	}
 	go api.Start()

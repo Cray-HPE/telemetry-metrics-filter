@@ -1,10 +1,12 @@
 package main
 
 import (
+	"strconv"
 	"sync/atomic"
 	"time"
 
 	"github.com/paulbellamy/ratecounter"
+	"github.com/prometheus/client_golang/prometheus"
 	"go.uber.org/zap"
 	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 )
@@ -28,7 +30,12 @@ type Producer struct {
 	brokerConfig BrokerConfig
 	brokerHealth BrokerHealth
 
-	metrics *ProducerMetrics
+	// Both internal metrics for logging and prometheus metric are provided
+	// This is for convenience as the prometheus structs do not provide a good
+	// way to read their values.  We could switch to only using the prometheus
+	// metrics and the /metrics endpoint and remove the internal ones
+	metrics     *ProducerMetrics
+	promMetrics *PromMetrics
 
 	producer *kafka.Producer
 	// ctx          context.Context
@@ -76,6 +83,10 @@ func (p *Producer) Start() {
 					zap.Uint64("FailedToProduceMessages", atomic.LoadUint64(&p.metrics.FailedToProduceMessages)),
 					zap.Int64("InstantKafkaMessagesPerSecond", p.metrics.InstantKafkaMessagesPerSecond.Rate()),
 				)
+				// Prometheus does not provide a "rate" metric so instead we use a gauge
+				// which we periodically update.  Here we simply reuse the periodic output
+				// of the internal metrics to do this.
+				p.promMetrics.MessagesProducedPerSecond.With(prometheus.Labels{"ProducerID": strconv.Itoa(p.id)}).Set(float64(p.metrics.InstantKafkaMessagesPerSecond.Rate()))
 			}
 		}
 	}()
@@ -120,9 +131,11 @@ func (p *Producer) Produce(topic string, payload []byte) error {
 	// Update some book keeping for the producer
 	if err != nil {
 		atomic.AddUint64(&p.metrics.FailedToProduceMessages, 1)
+		p.promMetrics.FailedToProduceMessages.With(prometheus.Labels{"ProducerID": strconv.Itoa(p.id)}).Inc()
 	} else {
 		atomic.AddUint64(&p.metrics.ProducedMessages, 1)
 		p.metrics.InstantKafkaMessagesPerSecond.Incr(1)
+		p.promMetrics.ProducedMessages.With(prometheus.Labels{"ProducerID": strconv.Itoa(p.id)}).Inc()
 	}
 
 	return err
