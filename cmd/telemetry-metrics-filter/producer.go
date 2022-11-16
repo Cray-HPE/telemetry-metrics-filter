@@ -46,12 +46,28 @@ func (p *Producer) Initialize() {
 	logger := p.logger
 	p.metrics = NewProducerMetrics()
 
+	//
+	// Build up configuration
+	//
+
+	// The following values are defaults that can be overridden
+	producerConfig := kafka.ConfigMap{}
+
+	// Add in provided settings
+	for key, value := range p.brokerConfig.ConsumerConfiguration {
+		producerConfig[key] = value
+	}
+
+	// Force add derived values, make sure that the procided config can't over write them
+	producerConfig["bootstrap.servers"] = p.brokerConfig.BrokerAddress
+
+	//
 	// Create the kafka producer
-	logger.Info("Initializing producer")
+	//
+
 	var err error
-	p.producer, err = kafka.NewProducer(&kafka.ConfigMap{
-		"bootstrap.servers": p.brokerConfig.BrokerAddress,
-	})
+	logger.Info("Initializing producer")
+	p.producer, err = kafka.NewProducer(&producerConfig)
 
 	if err != nil {
 		logger.Fatal("Failed to create producer", zap.Error(err))

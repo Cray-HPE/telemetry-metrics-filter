@@ -44,8 +44,6 @@ type Consumer struct {
 	consumerCtx context.Context
 	wg          *sync.WaitGroup
 
-	consumerSessionTimeoutSeconds int
-
 	brokerConfig BrokerConfig
 	brokerHealth BrokerHealth
 
@@ -59,18 +57,28 @@ func (c *Consumer) Start() {
 	c.metrics = NewConsumerMetrics()
 
 	//
-	// Connect to kafka
+	// Build up configuration
 	//
 	consumerConfig := kafka.ConfigMap{
-		"bootstrap.servers":      c.brokerConfig.BrokerAddress,
-		"group.id":               c.brokerConfig.ConsumerGroup,
-		"client.id":              fmt.Sprintf("%s-id-%d", c.hostname, c.id),
-		"session.timeout.ms":     c.consumerSessionTimeoutSeconds * 1000,
+		// The following values are defaults that can be overridden
+		"session.timeout.ms":     30000,
 		"statistics.interval.ms": 1000,
 		"enable.auto.commit":     true,
-		"auto.offset.reset":      "earliest",
+		"auto.offset.reset":      "latest",
 	}
 
+	// Add in provided settings
+	for key, value := range c.brokerConfig.ConsumerConfiguration {
+		consumerConfig[key] = value
+	}
+
+	// Force add derived values, make sure that the procided config can't over write them
+	consumerConfig["bootstrap.servers"] = c.brokerConfig.BrokerAddress
+	consumerConfig["client.id"] = fmt.Sprintf("%s-id-%d", c.hostname, c.id)
+
+	//
+	// Connect to kafka
+	//
 	logger.Info("Connecting to kafka", zap.Any("consumerConfig", consumerConfig))
 	kc, err := kafka.NewConsumer(&consumerConfig)
 

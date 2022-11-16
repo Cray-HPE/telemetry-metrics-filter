@@ -1,7 +1,12 @@
 
 {
-    "BrokerAddress": "localhost:9092",
-    "ConsumerGroup": "telemetry-metrics-filter",
+    "BrokerAddress": "kafka.sma.svc:9092",
+    "ConsumerConfiguration": {
+        "group.id": "telemetry-metrics-filter",
+        "session.timeout.ms": 30000,
+        "auto.offset.reset": "latest"
+    },
+    "ProducerConfiguration": {},
     "FilteredTopicSuffix": "-filtered",
     "TopicsToFilter": {
         "cray-telemetry-temperature": {

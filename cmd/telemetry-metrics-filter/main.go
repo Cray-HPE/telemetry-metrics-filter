@@ -87,8 +87,7 @@ func main() {
 	brokerConfigFile := flag.String("broker_config_file", "./resources/telemetry-filter-broker-config-go.json", "Broker configuration file")
 	workerCount := flag.Int("worker_count", 10, "Number of event workers")
 	httpListenString := flag.String("http_listen", "0.0.0.0:9088", "HTTP Server listen string")
-	unmarshalEventStrategyString := flag.String("unmarshal_event_strategy", "hmcollector", "How should json payloads be unmarshaled")
-	consumerSessionTimeoutSeconds := flag.Int("consumer_session_timeout_seconds", 20, "Configure kafka consumer session timeout in seconds")
+	unmarshalEventStrategyString := flag.String("unmarshal_event_strategy", "go-json", "How should json payloads be unmarshaled")
 
 	flag.Parse()
 
@@ -113,6 +112,8 @@ func main() {
 	if err := json.Unmarshal(brokerConfigRaw, &brokerConfig); err != nil {
 		logger.Fatal("Failed to unmarshal broker config file to json", zap.Error(err))
 	}
+	brokerConfig.ConsumerConfiguration.Normalize()
+	brokerConfig.ProducerConfiguration.Normalize()
 
 	// Setup signal handler
 	sigchan := make(chan os.Signal, 1)
@@ -225,8 +226,6 @@ func main() {
 		workers:      workers,
 		wg:           &consumerWg,
 		promMetrics:  metrics,
-
-		consumerSessionTimeoutSeconds: *consumerSessionTimeoutSeconds,
 	}
 
 	go consumer.Start()
