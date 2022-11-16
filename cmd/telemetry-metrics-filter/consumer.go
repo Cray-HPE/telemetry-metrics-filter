@@ -61,6 +61,7 @@ func (c *Consumer) Start() {
 	//
 	consumerConfig := kafka.ConfigMap{
 		// The following values are defaults that can be overridden
+		"group.id":               "telemetry-metrics-filter",
 		"session.timeout.ms":     30000,
 		"statistics.interval.ms": 1000,
 		"enable.auto.commit":     true,
