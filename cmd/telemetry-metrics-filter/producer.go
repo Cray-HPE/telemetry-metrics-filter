@@ -54,7 +54,7 @@ func (p *Producer) Initialize() {
 	producerConfig := kafka.ConfigMap{}
 
 	// Add in provided settings
-	for key, value := range p.brokerConfig.ConsumerConfiguration {
+	for key, value := range p.brokerConfig.ProducerConfiguration {
 		producerConfig[key] = value
 	}
 
