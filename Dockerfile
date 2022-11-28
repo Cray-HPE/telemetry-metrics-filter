@@ -1,53 +1,78 @@
-#FROM arti.dev.cray.com/baseos-docker-master-local/alpine:3.16.2
-FROM artifactory.algol60.net/docker.io/library/alpine:3.16.2 AS build-base
+# MIT License
+#
+# (C) Copyright [2019-2022] Hewlett Packard Enterprise Development LP
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
 
-ENV LIBRD_VER=1.9.2
-WORKDIR /tmp
+# Dockerfile for building HMS Redfish Collector.
 
-RUN set -eux \
+# v1.1.0 of Confluent Go Kafka requires at least v1.1.0 of librdkafka.
+ARG LIBRDKAFKA_VER_MIN=1.1.0
+
+# Build base just has the packages installed we need.
+FROM artifactory.algol60.net/docker.io/library/golang:1.19-alpine AS build-base
+
+ARG LIBRDKAFKA_VER_MIN
+
+RUN set -ex \
     && apk -U upgrade \
-    && apk add build-base
+    && apk add --no-cache \
+        build-base \
+        "librdkafka-dev>${LIBRDKAFKA_VER_MIN}" \
+        pkgconf
 
+# Base copies in the files we need to test/build.
+FROM build-base AS base
 
-#RUN apk add --no-cache python3 py3-pip librdkafka
-#RUN apk add --no-cache --virtual build-dep librdkafka-dev python3-dev gcc g++ linux-headers
-RUN apk add --no-cache python3 py3-pip
-RUN apk add --no-cache --virtual build-dep python3-dev gcc g++ linux-headers
+RUN go env -w GO111MODULE=auto
 
-FROM build-base as dependency-build
-# Newer librdkafka install because confluent-kafka:1.9.2 is incompatiblbe with librdkafka installed for alpine:3.16
-RUN apk add --no-cache --virtual .make-deps bash make wget curl git &&  \
-    apk add --no-cache musl-dev zlib-dev openssl zstd-dev pkgconfig libc-dev
-RUN wget https://github.com/edenhill/librdkafka/archive/v${LIBRD_VER}.tar.gz && \
-    tar -xvf v${LIBRD_VER}.tar.gz && cd librdkafka-${LIBRD_VER} &&  \
-    ./configure --prefix /usr &&  \
-    make && make install && make clean &&  \
-    rm -rf librdkafka-${LIBRD_VER} && rm -rf v${LIBRD_VER}.tar.gz && \
-    apk del .make-deps
+# Copy all the necessary files to the image.
+COPY cmd        $GOPATH/src/github.com/Cray-HPE/telemetry-metrics-filter/cmd
+# COPY internal   $GOPATH/src/github.com/Cray-HPE/telemetry-metrics-filter/internal
+COPY vendor     $GOPATH/src/github.com/Cray-HPE/telemetry-metrics-filter/vendor
 
-FROM dependency-build as builder
-WORKDIR /code
-COPY requirements-alpine.in ./requirements.in
-RUN pip3 install pip-tools
-RUN pip-compile --output-file requirements.txt requirements.in
-RUN pip3 install --no-cache-dir -r requirements.txt
-RUN apk update && \
-    apk add --upgrade apk-tools &&  \
-    apk -U upgrade && \
-    rm -rf /var/cache/apk/* \
+### Build Stage ###
+FROM base AS builder
 
-FROM builder as final
-COPY resources/kafka-topics.json /usr/local/etc/service/kafka-topics.json
+RUN set -ex \
+    && go build -tags dynamic -v -o /usr/local/bin/telemetry-metrics-filter github.com/Cray-HPE/telemetry-metrics-filter/cmd/telemetry-metrics-filter
 
-ENV WORKERS=4
-ENV WORKER_TIMEOUT=300
-ENV APP_NAME=telemetry-metrics-filter
-ENV APP_PORT=9088
-ENV KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-ENV KAFKA_TOPIC_FILE=/usr/local/etc/service/kafka-topics.json
+## Final Stage ###
 
-#todo need to set this to run as NOBODY
+FROM artifactory.algol60.net/docker.io/alpine:3.15
+LABEL maintainer="Hewlett Packard Enterprise"
+EXPOSE 80
 
-COPY ./app ./app
+ARG LIBRDKAFKA_VER_MIN
 
-CMD ["sh", "-c", "gunicorn app.main:app --workers=$WORKERS --worker-class=uvicorn.workers.UvicornWorker --bind=0.0.0.0:$APP_PORT --timeout ${WORKER_TIMEOUT}" ]
+COPY --from=builder /usr/local/bin/telemetry-metrics-filter /usr/local/bin
+
+RUN set -ex \
+    && apk -U upgrade --no-cache \
+    && apk add --no-cache \
+        "librdkafka>${LIBRDKAFKA_VER_MIN}" \
+        curl \
+        jq
+
+ENV LOG_LEVEL=info
+
+# nobody 65534:65534
+USER 65534:65534
+
+CMD ["sh", "-c", "telemetry-metrics-filter"]
