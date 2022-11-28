@@ -24,10 +24,7 @@
 NAME ?= telemetry-metrics-filter
 VERSION ?= $(shell cat .version)
 
-all : image image-go
+all : image
 
 image:
 	docker build ${NO_CACHE} --pull ${DOCKER_ARGS} --tag '${NAME}:${VERSION}' .
-
-image-go:
-	docker build ${NO_CACHE} --pull ${DOCKER_ARGS} --tag '${NAME}-go:${VERSION}' . -f Dockerfile.go
