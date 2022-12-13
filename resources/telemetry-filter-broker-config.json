@@ -1,0 +1,31 @@
+
+{
+    "BrokerAddress": "kafka.sma.svc:9092",
+    "ConsumerConfiguration": {
+        "group.id": "telemetry-metrics-filter",
+        "session.timeout.ms": 30000,
+        "auto.offset.reset": "latest"
+    },
+    "ProducerConfiguration": {},
+    "FilteredTopicSuffix": "-filtered",
+    "TopicsToFilter": {
+        "cray-telemetry-temperature": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-voltage": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-power": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-energy": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-fan": {
+            "ThrottlePeriodSeconds": 10 
+        },
+        "cray-telemetry-pressure": {
+            "ThrottlePeriodSeconds": 10 
+        }
+    } 
+}

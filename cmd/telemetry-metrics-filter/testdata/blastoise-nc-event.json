@@ -1,0 +1,2014 @@
+{
+    "Context": "3677~test~4FAB",
+    "Events": [
+        {
+            "EventTimestamp": "2022-11-10T15:09:14Z",
+            "MessageId": "CrayTelemetry.Power",
+            "Oem": {
+                "Sensors": [
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 0,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 1,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 2,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 3,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 4,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 5,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 6,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 7,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 8,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 9,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 10,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 11,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 12,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 13,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 14,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 15,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 16,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 17,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 18,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 19,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 20,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 21,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 22,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 23,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 24,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 25,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 26,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 27,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 28,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 29,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 30,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 31,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 32,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 33,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 34,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 35,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 36,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 37,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 38,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 39,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 40,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 41,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 42,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 43,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 44,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 45,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 46,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 47,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 48,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 49,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 50,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 51,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 52,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 53,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 54,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 55,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 56,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 57,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 58,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 59,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 60,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 61,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 62,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 63,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 64,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 65,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 66,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 67,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 68,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 69,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 70,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 71,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 72,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 73,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 74,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 75,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 76,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 77,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 78,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 79,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 80,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 81,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 82,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 83,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 84,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 85,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 86,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 87,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 88,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 89,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 90,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 91,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 92,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 93,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 94,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 95,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 96,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 97,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 98,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 99,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 100,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 101,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 102,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 103,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 104,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 105,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 106,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 107,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 108,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 109,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 110,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 111,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 112,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 113,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 114,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 115,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 116,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 117,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 118,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 119,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 120,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 121,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 122,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 123,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 124,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 125,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 126,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 127,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 128,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 129,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 130,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 131,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 132,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 133,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 134,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 135,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 136,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 137,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 138,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 139,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 140,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 141,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 142,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 143,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 144,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 145,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 146,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 147,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 148,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 149,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 150,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 151,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 152,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 153,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 154,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 155,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 156,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 157,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 158,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 159,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 160,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 161,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 162,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 163,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 164,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 165,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 166,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 167,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 168,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 169,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 170,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 171,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 172,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 173,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 174,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 175,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 176,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 177,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 178,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 179,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 180,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 181,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 182,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 183,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 184,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 185,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 186,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 187,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 188,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 189,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 190,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 191,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 192,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 193,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 194,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 195,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 196,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 197,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 198,
+                        "Value": "0.359865920834472"
+                    },
+                    {
+                        "Timestamp": "2022-11-10T15:09:14Z",
+                        "Location": "3677~test~4FAB",
+                        "ParentalContext": "Chassis",
+                        "PhysicalContext": "VoltageRegulator",
+                        "PhysicalSubContext": "Output",
+                        "ParentalIndex": 0,
+                        "Index": 199,
+                        "Value": "0.359865920834472"
+                    }
+                ],
+                "TelemetrySource": "nC"
+            }
+        }
+    ]
+}
